@@ -1,0 +1,12 @@
+appId: org.wikipedia
+tags:
+    - onboarding
+---
+- runFlow: 
+    file: "../common/setup/move_from_welcome_screen.yaml"
+- tapOn: "Next"
+- assertVisible: "Select at least one interest"
+- assertVisible: "Architecture"
+- tapOn: "Architecture"
+- assertVisible: "1 selected"
+- assertVisible: "Deselect all"

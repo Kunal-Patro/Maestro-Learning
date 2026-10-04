@@ -1,0 +1,29 @@
+appId: org.wikipedia
+tags:
+  - onboarding
+  - smoke
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: "../common/steps/dismiss_sync_promt.yaml"
+- runFlow:
+    when:
+      visible: "Logged out"
+    commands:
+      - tapOn: "Cancel"
+- tapOn: "Forward"
+- tapOn: "Forward"
+- assertVisible: "English"
+- assertVisible: "Primary"
+- assertVisible: "Add or edit your languages"
+- tapOn: "Add or edit your languages"
+- tapOn: "Add language"
+- tapOn: "Search"
+- inputText: "Hindi"
+- tapOn: "हिन्दी"
+- assertVisible:
+    id: "langCodeText"
+    index: 1
+- tapOn: "Navigate up"
+- assertVisible: "हिन्दी"

@@ -1,0 +1,7 @@
+appId: org.wikipedia
+---
+- runFlow:
+    when:
+      visible: "Enable syncing"
+    commands:
+      - tapOn: "No thanks"

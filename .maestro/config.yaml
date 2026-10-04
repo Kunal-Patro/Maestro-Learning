@@ -1,0 +1,5 @@
+flows:
+    - "onboarding/*"
+    - "auth/*"
+executionOrder:
+    continueOnFailure: true

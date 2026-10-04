@@ -1,0 +1,20 @@
+appId: org.wikipedia
+tags: 
+    - onboarding
+    - smoke
+---
+- runFlow: 
+    file: ./interest_selection.yaml
+- tapOn: "Next"
+- tapOn: "Personalized content"
+- tapOn: "Next"
+- runFlow: 
+    when: 
+        visible: "Swipe to Explore"
+    commands: 
+        - tapOn: "Got it"
+            # id: "org.wikipedia:id/touch_outside"
+    label: Dismiss the Swipe to Explore screen
+# - tapOn: "Got it"
+- assertVisible:
+    id: "main_view_pager"

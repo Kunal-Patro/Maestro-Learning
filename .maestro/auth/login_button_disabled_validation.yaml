@@ -1,0 +1,25 @@
+appId: org.wikipedia
+tags:
+  - auth
+  - smoke
+properties:
+  testCaseId: "TC-Login-002"
+  priority: "Low"
+---
+- runFlow:
+    file: ../common/steps/advance_to_login_screen.yaml
+- assertVisible:
+    id: "login_button"
+    enabled: false
+- tapOn:
+    id: "login_username_text"
+- inputText: "faileduser"
+- assertVisible:
+    id: "login_button"
+    enabled: false
+- tapOn:
+    id: "login_password_input"
+- inputText: "failedpassword"
+- assertVisible:
+    id: "login_button"
+    enabled: true

@@ -1,0 +1,17 @@
+appId: org.wikipedia
+---
+- runFlow: 
+    file: ../setup/skip_onboarding.yaml
+- tapOn:
+    id: "navigation_bar_item_small_label_view"
+    text: "More"
+- tapOn:
+    id: "main_drawer_login_button"
+- tapOn:
+    id: "create_account_login_button"
+- assertVisible:
+    id: "login_password_input"
+- assertVisible:
+    id: "login_username_text"
+- assertVisible:
+    id: "login_button"

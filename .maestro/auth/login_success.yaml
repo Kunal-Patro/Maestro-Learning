@@ -1,0 +1,33 @@
+appId: org.wikipedia
+tags:
+  - auth
+  - smoke
+  - requires-network
+properties:
+  testCaseId: "TC-Login-001"
+  priority: "High"
+---
+- runFlow:
+    file: ../common/steps/advance_to_login_screen.yaml
+- tapOn:
+    id: "login_username_text"
+- inputText: ${WIKI_USER}
+- tapOn:
+    id: "login_password_input"
+- inputText: ${WIKI_PASS}
+- hideKeyboard
+- tapOn:
+    id: "login_button"
+- runFlow:
+    file: ../common/steps/dismiss_sync_promt.yaml
+- extendedWaitUntil:
+    visible:
+      id: "navigation_bar_item_small_label_view"
+      text: "More"
+    timeout: 20000
+- tapOn:
+    id: "navigation_bar_item_small_label_view"
+    text: "More"
+- assertVisible:
+    id: "main_drawer_account_name"
+    text: "${WIKI_USER}"

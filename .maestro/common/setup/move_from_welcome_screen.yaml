@@ -1,0 +1,20 @@
+appId: org.wikipedia
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    file: "../steps/dismiss_sync_promt.yaml"
+- runFlow:
+    when:
+      visible: "Logged out"
+    commands:
+      - tapOn: "Cancel"
+- runFlow:
+    when:
+      visible: "Logged out"
+    commands:
+      - tapOn: "Cancel"
+- tapOn: "Forward"
+- tapOn: "Forward"
+- tapOn: "Forward"
+- assertVisible: "Skip"

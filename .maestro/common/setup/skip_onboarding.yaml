@@ -1,0 +1,7 @@
+appId: org.wikipedia
+---
+- runFlow: 
+    file: "./move_from_welcome_screen.yaml"
+- tapOn: "Skip"
+- assertVisible:
+    id: "main_view_pager"

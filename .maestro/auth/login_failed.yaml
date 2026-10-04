@@ -1,0 +1,24 @@
+appId: org.wikipedia
+tags:
+  - auth
+  - smoke
+  - requires-network
+---
+- runFlow:
+    file: ../common/steps/advance_to_login_screen.yaml
+- tapOn:
+    id: "login_username_text"
+- inputText: "faileduser"
+- tapOn:
+    id: "login_password_input"
+- inputText: "failedpassword"
+- hideKeyboard
+- tapOn:
+    id: "login_button"
+- extendedWaitUntil:
+    visible:
+      id: "snackbar_text"
+      text: "Incorrect username or password entered.\nPlease try again."
+    timeout: 5000
+- assertVisible:
+    id: "login_button"
