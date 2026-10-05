@@ -44,7 +44,9 @@ jobs:
           profile: pixel_6
           script: |
             adb install -r app.apk
-            maestro test --format junit --output report.xml --include-tags smoke --exclude-tags requires-network --debug-output ./debug .maestro/ -e WIKI_USER="${WIKI_USER}" -e WIKI_PASS="${WIKI_PASS}"
+            adb shell getprop persist.sys.locale
+            maestro test --format junit --output report.xml --include-tags smoke --exclude-tags requires-network --debug-output $GITHUB_WORKSPACE/debug .maestro/ -e WIKI_USER="${WIKI_USER}" -e WIKI_PASS="${WIKI_PASS}"
+            ls -la $GITHUB_WORKSPACE/debug/ || echo "no debug dir"
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -53,3 +55,4 @@ jobs:
           path: |
             report.xml
             debug/
+            ~/.maestro/tests/
