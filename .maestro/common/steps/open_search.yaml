@@ -1,0 +1,10 @@
+appId: org.wikipedia
+---
+- tapOn:
+    id: "nav_tab_search"
+- runFlow:
+    file: ./dismiss_search_popups.yaml
+- tapOn:
+    id: "search_card"
+- assertVisible:
+    id: "search_src_text"

@@ -1,33 +1,21 @@
 appId: org.wikipedia
+name: Login succeeds with valid credentials
 tags:
   - auth
-  - smoke
+  - regression
   - requires-network
-properties:
-  testCaseId: "TC-Login-001"
-  priority: "High"
+onFlowComplete:
+  - runFlow: ../common/teardown/logout.yaml
 ---
+# WIKI_USER / WIKI_PASS must be passed at runtime with -e. Never commit them.
 - runFlow:
-    file: ../common/steps/advance_to_login_screen.yaml
+    file: "../common/setup/login_as_user.yaml"
 - tapOn:
-    id: "login_username_text"
-- inputText: ${WIKI_USER}
-- tapOn:
-    id: "login_password_input"
-- inputText: ${WIKI_PASS}
-- hideKeyboard
-- tapOn:
-    id: "login_button"
-- runFlow:
-    file: ../common/steps/dismiss_sync_promt.yaml
-- extendedWaitUntil:
-    visible:
-      id: "navigation_bar_item_small_label_view"
-      text: "More"
-    timeout: 20000
-- tapOn:
-    id: "navigation_bar_item_small_label_view"
-    text: "More"
+    id: "nav_tab_more"
 - assertVisible:
     id: "main_drawer_account_name"
-    text: "${WIKI_USER}"
+    text: ${WIKI_USER}
+- assertVisible:
+    id: "main_drawer_watchlist_container"
+- assertNotVisible:
+    id: "main_drawer_login_button"

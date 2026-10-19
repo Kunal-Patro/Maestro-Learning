@@ -1,0 +1,14 @@
+appId: org.wikipedia
+---
+# Fresh app, logged in as WIKI_USER. leaves: home feed (main_view_pager), logged in.
+# Callers must add `onFlowComplete: - runFlow: ../common/teardown/logout.yaml`:
+# the Android account survives clearState and breaks the next flow's setup.
+- assertTrue:
+    condition: ${typeof WIKI_USER !== 'undefined' && WIKI_USER !== '' && typeof WIKI_PASS !== 'undefined' && WIKI_PASS !== ''}
+    label: "WIKI_USER and WIKI_PASS must be passed with -e"
+- runFlow:
+    file: "./skip_onboarding.yaml"
+- runFlow:
+    file: "../steps/open_login_screen.yaml"
+- runFlow:
+    file: "../steps/login.yaml"

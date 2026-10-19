@@ -1,0 +1,7 @@
+appId: org.wikipedia
+---
+- tapOn:
+    id: "search_src_text"
+- inputText: ${SEARCH_TERM}
+- tapOn:
+    id: "search_close_btn"

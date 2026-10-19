@@ -45,14 +45,11 @@ jobs:
           script: |
             adb install -r app.apk
             adb shell getprop persist.sys.locale
-            maestro test --format junit --output report.xml --include-tags smoke --exclude-tags requires-network --debug-output $GITHUB_WORKSPACE/debug .maestro/ -e WIKI_USER="${WIKI_USER}" -e WIKI_PASS="${WIKI_PASS}"
-            ls -la $GITHUB_WORKSPACE/debug/ || echo "no debug dir"
+            maestro test --format junit --output reports/junit.xml --test-output-dir reports/artifacts --include-tags smoke --exclude-tags requires-network --debug-output $GITHUB_WORKSPACE/reports/debug .maestro/ -e WIKI_USER="${WIKI_USER}" -e WIKI_PASS="${WIKI_PASS}"
+            ls -la $GITHUB_WORKSPACE/reports/debug/ || echo "no debug dir"
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: maestro-debug
-          path: |
-            report.xml
-            debug/
-            ~/.maestro/tests/
+          path: reports/

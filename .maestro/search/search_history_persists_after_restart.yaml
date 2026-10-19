@@ -1,0 +1,30 @@
+appId: org.wikipedia
+tags:
+  - search
+  - smoke
+env:
+  SEARCH_TERM: "Saturn"
+---
+- runFlow:
+    file: ../common/setup/skip_onboarding.yaml
+- runFlow:
+    file: ../common/steps/open_search.yaml
+- assertNotVisible:
+    text: ${SEARCH_TERM}
+    childOf:
+      id: "recent_searches_recycler"
+- runFlow:
+    file: ../common/steps/search_term.yaml
+    env:
+      SEARCH_TERM: ${SEARCH_TERM}
+- stopApp
+- launchApp:
+    clearState: false
+- runFlow:
+    file: ../common/steps/dismiss_sync_promt.yaml
+- runFlow:
+    file: ../common/steps/open_search.yaml
+- assertVisible:
+    text: ${SEARCH_TERM}
+    childOf:
+      id: "recent_searches_recycler"

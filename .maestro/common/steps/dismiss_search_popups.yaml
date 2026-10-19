@@ -1,0 +1,15 @@
+appId: org.wikipedia
+---
+- runFlow:
+    when:
+      visible:
+        id: "design_bottom_sheet"
+    commands:
+      - tapOn: "Close"
+- runFlow:
+    when:
+      visible:
+        id: "balloon"
+    commands:
+      - tapOn:
+          id: "balloon"

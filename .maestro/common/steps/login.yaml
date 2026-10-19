@@ -1,0 +1,32 @@
+appId: org.wikipedia
+---
+# requires: on empty Log in form; WIKI_USER / WIKI_PASS set. leaves: home feed (main_view_pager), logged in, sync prompt dismissed for good.
+- tapOn:
+    id: "login_username_text"
+- inputText: ${WIKI_USER}
+- tapOn:
+    id: "login_password_input"
+- inputText: ${WIKI_PASS}
+- hideKeyboard
+- assertVisible:
+    id: "login_button"
+    enabled: true
+- tapOn:
+    id: "login_button"
+- extendedWaitUntil:
+    notVisible:
+      id: "login_primary_container"
+    timeout: 15000
+# Collection-sync prompt appears after a fresh login; required step (doubles as its canary).
+- extendedWaitUntil:
+    visible:
+      id: "dialog_checkbox"
+    timeout: 15000
+- tapOn:
+    id: "dialog_checkbox"
+- tapOn:
+    id: "android:id/button2"
+- assertNotVisible:
+    id: "alertTitle"
+- assertVisible:
+    id: "main_view_pager"

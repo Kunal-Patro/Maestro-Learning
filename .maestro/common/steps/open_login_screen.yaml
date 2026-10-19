@@ -1,0 +1,12 @@
+appId: org.wikipedia
+---
+# requires: on home feed (main_view_pager), logged out. leaves: on Log in form, fields empty.
+- tapOn:
+    id: "nav_tab_more"
+- tapOn:
+    id: "main_drawer_login_button"
+- tapOn:
+    id: "create_account_login_button"
+- assertVisible:
+    id: "login_button"
+    enabled: false

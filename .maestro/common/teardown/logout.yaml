@@ -1,0 +1,54 @@
+appId: org.wikipedia
+---
+# Called from onFlowComplete. requires: anything. leaves: logged out (Android account removed).
+# Every command is optional: a failed cleanup must not change the test result.
+- stopApp:
+    optional: true
+- launchApp:
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "main_view_pager"
+    timeout: 15000
+    optional: true
+- runFlow:
+    when:
+      visible:
+        id: "dialog_checkbox"
+    commands:
+      - tapOn:
+          id: "dialog_checkbox"
+          optional: true
+      - tapOn:
+          id: "android:id/button2"
+          optional: true
+- runFlow:
+    when:
+      visible:
+        id: "main_view_pager"
+    commands:
+      - tapOn:
+          id: "nav_tab_more"
+          optional: true
+      - runFlow:
+          when:
+            visible:
+              id: "main_drawer_account_name"
+          commands:
+            - tapOn:
+                id: "main_drawer_settings_container"
+                optional: true
+            - scrollUntilVisible:
+                element:
+                  id: "logoutButton"
+                direction: DOWN
+                optional: true
+            - tapOn:
+                id: "logoutButton"
+                optional: true
+            - tapOn:
+                id: "android:id/button1"
+                optional: true
+            - assertVisible:
+                id: "main_view_pager"
+                optional: true

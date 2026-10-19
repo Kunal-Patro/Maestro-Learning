@@ -1,0 +1,23 @@
+appId: org.wikipedia
+tags:
+  - search
+  - smoke
+env:
+  SEARCH_TERM: "Apollo"
+---
+- runFlow:
+    file: ../common/setup/skip_onboarding.yaml
+- runFlow:
+    file: ../common/steps/open_search.yaml
+- assertNotVisible:
+    text: ${SEARCH_TERM}
+    childOf:
+      id: "recent_searches_recycler"
+- runFlow:
+    file: ../common/steps/search_term.yaml
+    env:
+      SEARCH_TERM: ${SEARCH_TERM}
+- assertVisible:
+    text: ${SEARCH_TERM}
+    childOf:
+      id: "recent_searches_recycler"
