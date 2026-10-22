@@ -3,8 +3,8 @@ name: Maestro
 
 on:
   pull_request:
-  schedule:
-    - cron: '30 19 * * *'
+  # schedule:
+  #   - cron: '30 19 * * *'
   workflow_dispatch:
 
 jobs:
